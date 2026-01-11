@@ -127,5 +127,7 @@ User Input → Categorization → DB Storage → AI Insight Layer → Dashboard 
 | Auth      | Firebase / JWT          |
 
 
+CHECK THE DOCUMENTATION BY DOWNLOADING THE PDF OR THROUGH THE LINK https://drive.google.com/file/d/1nMqDWCYMf0BIZgeRPJCB0fe8_Xj_bj4v/view?usp=sharing
+
 
 
