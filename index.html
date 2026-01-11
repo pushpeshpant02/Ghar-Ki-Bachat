@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ghar Ki Bachat</title>
+    <style>
+        body { font-family: Arial; margin: 0; background: #f5f6fa; }
+
+        nav {
+            background: #2b6cb0;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav button {
+            background: white;
+            color: #2b6cb0;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 30px;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .box {
+            background: white;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 4px rgba(0,0,0,0.1);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button.save-btn {
+            background: #2b6cb0;
+            color: white;
+            padding: 10px 25px;
+        }
+
+        .value {
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('add')">Add Expense</button>
+    <button onclick="window.location.href='manas.html'">Dashboard</button>
+    <button onclick="showSection('ai')">AI Advisory</button>
+</nav>
+
+<!-- HOME SECTION -->
+<section id="home" class="show">
+    <h1>Ghar Ki Bachat</h1>
+    <p>Just a small Protoype of </p>
+    <p>Your Smart Financial Assistant for Indian Families</p>
+
+    <div class="box">
+        <h3>Expense Tracker</h3>
+        <p>Record and understand daily spending patterns.</p>
+    </div>
+
+    <div class="box">
+        <h3>AI Advisory</h3>
+        <p>Get personalized financial insights based on your habits.</p>
+    </div>
+
+    <div class="box">
+        <h3>Learning Section</h3>
+        <p>Simple Hinglish explanations of GST, SIP, Insurance, EMI & more.</p>
+    </div>
+</section>
+
+<!-- ADD EXPENSE SECTION -->
+<section id="add">
+    <h2>Add Expense</h2>
+
+    <select id="category">
+        <option>Food</option>
+        <option>Travel</option>
+        <option>Medical</option>
+        <option>Rent</option>
+        <option>Shopping</option>
+    </select>
+
+    <input type="number" id="amount" placeholder="Amount ₹">
+    <input type="date" id="date">
+
+    <button class="save-btn" onclick="saveExpense()">Save Expense</button>
+</section>
+
+<!-- DASHBOARD SECTION -->
+<section id="dashboard">
+    <h2>Dashboard Summary</h2>
+
+    <div class="box">
+        <p>Total Income:</p>
+        <p class="value" id="incomeVal">₹30,000</p>
+    </div>
+
+    <div class="box">
+        <p>Total Expenses:</p>
+        <p class="value" id="expenseVal">₹0</p>
+    </div>
+
+    <div class="box">
+        <p>Savings:</p>
+        <p class="value" id="savingsVal">₹30,000</p>
+    </div>
+
+    <div class="box">
+        <p>Alerts:</p>
+        <p id="alertVal">No major overspending yet.</p>
+    </div>
+</section>
+
+<!-- AI ADVISORY SECTION -->
+<section id="ai">
+    <h2>AI Advisor</h2>
+
+    <div class="box" id="aiBox">
+        Add some expenses to get personalized suggestions.
+    </div>
+</section>
+
+<script>
+let totalExpenses = 0;
+
+// Section Switching
+function showSection(id) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("show"));
+    document.getElementById(id).classList.add("show");
+}
+
+// Save Expense Logic
+function saveExpense() {
+    let amt = Number(document.getElementById("amount").value);
+
+    if (!amt) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    totalExpenses += amt;
+
+    document.getElementById("expenseVal").innerText = "₹" + totalExpenses;
+    document.getElementById("savingsVal").innerText = "₹" + (30000 - totalExpenses);
+
+    // AI Insight Update
+    if (totalExpenses > 20000) {
+        document.getElementById("aiBox").innerText =
+            "You are spending too much this month. Try reducing food & travel expenses.";
+        document.getElementById("alertVal").innerText =
+            "Warning: High spending detected!";
+    } else if (totalExpenses > 10000) {
+        document.getElementById("aiBox").innerText =
+            "Your spending is moderate. Keep tracking to avoid overshooting your budget.";
+        document.getElementById("alertVal").innerText =
+            "Notice: You crossed 10K spending.";
+    } else {
+        document.getElementById("aiBox").innerText =
+            "You are within safe limits. Good job managing your money!";
+        document.getElementById("alertVal").innerText =
+            "No major issues detected.";
+    }
+
+    alert("Expense Saved!");
+}
+</script>
+
+</body>
+</html>
